@@ -1,0 +1,460 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 128,
+   "id": "c2f0b475",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import tweepy\n",
+    "import credentials\n",
+    "\n",
+    "client = tweepy.client.Client(bearer_token = credentials.BEARER_TOKEN, consumer_key = credentials.API_KEY, consumer_secret = credentials.API_KEY_SECRET)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 129,
+   "id": "2d571f11",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "226561689"
+      ]
+     },
+     "execution_count": 129,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "eastern = client.get_user(username='EasternCTStateU',\n",
+    "                         user_fields = ['location','description']) \n",
+    "eastern.data.id"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 130,
+   "id": "50b0ce8b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<User id=226561689 name=Eastern CT State University username=EasternCTStateU>"
+      ]
+     },
+     "execution_count": 130,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user = eastern.data\n",
+    "user"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 131,
+   "id": "aef8a44e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "226561689"
+      ]
+     },
+     "execution_count": 131,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user.id"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 132,
+   "id": "e7b97245",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Name: Eastern CT State University\n",
+      "Username: EasternCTStateU\n",
+      "Description: The official Twitter feed for Eastern Connecticut State University, Connecticut's only designated public liberal arts university.\n",
+      "Location: Willimantic, Connecticut\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('Name:',user.name)\n",
+    "print('Username:',user.username)\n",
+    "print('Description:',user.description)\n",
+    "print('Location:',user.location)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 133,
+   "id": "14869fc6",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "226561689"
+      ]
+     },
+     "execution_count": 133,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "eastern = client.get_user(username='EasternCTStateU',\n",
+    "                         user_fields = 'public_metrics') \n",
+    "eastern.data.id"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 134,
+   "id": "75b16732",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Eastern has 3731 followers and 114 friends\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('Eastern has',eastern.data.public_metrics['followers_count'],'followers and', eastern.data.public_metrics['following_count'],'friends')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 158,
+   "id": "743cf1a5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Response(data=[<Tweet id=1508560016923820032 text='RT @pat_kingsley: Yet another fantastic and well-researched piece. And @CNET is no small media outlet. Well done! @SaveStandard  https://t.…'>, <Tweet id=1508559898417766407 text='RT @CircadianClocks: See Op-Ed by @ErikHerzog and me on DST. @medpagetoday @genevievefri @SRBR_Outreach \\nOpinion | Permanent Daylight Savin…'>, <Tweet id=1508557099558711306 text='RT @CircadianClocks: See Op-Ed by @ErikHerzog and me on DST. @medpagetoday @genevievefri @SRBR_Outreach \\nOpinion | Permanent Daylight Savin…'>, <Tweet id=1508556849968123904 text='RT @OED: OED Word of the Day at the start of Daylight Saving Time: dayside, n. The side of a planet that is facing the sun and is therefore…'>, <Tweet id=1508552390919737355 text='RT @CircadianClocks: See Op-Ed by @ErikHerzog and me on DST. @medpagetoday @genevievefri @SRBR_Outreach \\nOpinion | Permanent Daylight Savin…'>, <Tweet id=1508551645726183439 text='RT @SaveStandard: “Standard Time is better aligned with the position of the sun and human nature.” Thank you, Bloomberg Opinion Editorial B…'>, <Tweet id=1508548793570103296 text='RT @SPORTATSABC: Due to Daylight Saving Time 2022, please note the below changes\\nCatch the most anticipated match 🇿🇦 vs 🇫🇷 29 March \\n⏰ Buil…'>, <Tweet id=1508548172393684994 text='RT @xkcd: Reminder from my book How To that if you’re upset about daylight saving changes or have any complaints about your time zone, you…'>, <Tweet id=1508548012322164737 text='RT @CircadianClocks: See Op-Ed by @ErikHerzog and me on DST. @medpagetoday @genevievefri @SRBR_Outreach \\nOpinion | Permanent Daylight Savin…'>, <Tweet id=1508547888237981718 text='RT @PoliticsPollss: Daylight saving time is the practice of advancing clocks during summer months by one hour so that evening daylight last…'>], includes={}, errors=[], meta={'newest_id': '1508560016923820032', 'oldest_id': '1508547888237981718', 'result_count': 10, 'next_token': 'b26v89c19zqg8o3fpyqom5symdlkjtyxwul2vo68ksakd'})"
+      ]
+     },
+     "execution_count": 158,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results = client.search_recent_tweets('Daylight Saving Time lang:en is:retweet')\n",
+    "results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 159,
+   "id": "050c30e8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "results = client.search_recent_tweets('daylight saving time lang:en', expansions = 'author_id')\n",
+    "tweet1 = results.data[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 160,
+   "id": "c2e4a100",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[<User id=1137782054848851968 name=Save Standard Time username=SaveStandard>,\n",
+       " <User id=21567370 name=powestermark username=powestermark>,\n",
+       " <User id=2835722978 name=claire trần username=clairevtran>,\n",
+       " <User id=2811533662 name=Dominique Harajchi username=dharajchi>,\n",
+       " <User id=1188618738 name=жб ܝܘܢܰܬܰܢ username=mouettedursseau>,\n",
+       " <User id=615434038 name=221 Digital username=221Digital>,\n",
+       " <User id=875730347803250688 name=Pat username=pat_kingsley>,\n",
+       " <User id=47695418 name=Calcasieu Parish username=cppj>,\n",
+       " <User id=3298727791 name=Christian Benedict, PhD username=sleep_advocate>,\n",
+       " <User id=16924973 name=Barb Szyszkiewicz username=franciscanmom>]"
+      ]
+     },
+     "execution_count": 160,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results.includes['users']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 162,
+   "id": "4e241315",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "users_dictionary = { u.id:u for u in results.includes['users']}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 163,
+   "id": "2d5f82ac",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Response(data=<User id=1137782054848851968 name=Save Standard Time username=SaveStandard>, includes={}, errors=[], meta={})"
+      ]
+     },
+     "execution_count": 163,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user = client.get_user(id = results.data[0].author_id)\n",
+    "user"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 164,
+   "id": "e4884ef0",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "User name: SaveStandard\n",
+      "Link: https://twitter.com/SaveStandard\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('User name:', user.data.username)\n",
+    "print('Link: https://twitter.com/' + user.data.username)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 165,
+   "id": "38da8854",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Response(data=<User id=21567370 name=powestermark username=powestermark>, includes={}, errors=[], meta={})"
+      ]
+     },
+     "execution_count": 165,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user = client.get_user(id = results.data[1].author_id)\n",
+    "user"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 166,
+   "id": "f7f18ab2",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "User name: powestermark\n",
+      "Link: https://twitter.com/powestermark\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('User name:', user.data.username)\n",
+    "print('Link: https://twitter.com/' + user.data.username)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 167,
+   "id": "ba622296",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Response(data=<User id=2835722978 name=claire trần username=clairevtran>, includes={}, errors=[], meta={})"
+      ]
+     },
+     "execution_count": 167,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user = client.get_user(id = results.data[2].author_id)\n",
+    "user"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 168,
+   "id": "b956d1b3",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "User name: clairevtran\n",
+      "Link: https://twitter.com/clairevtran\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('User name:', user.data.username)\n",
+    "print('Link: https://twitter.com/' + user.data.username)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 169,
+   "id": "08f501b6",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Response(data=<User id=2811533662 name=Dominique Harajchi username=dharajchi>, includes={}, errors=[], meta={})"
+      ]
+     },
+     "execution_count": 169,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user = client.get_user(id = results.data[3].author_id)\n",
+    "user"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 170,
+   "id": "9f34b7eb",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "User name: dharajchi\n",
+      "Link: https://twitter.com/dharajchi\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('User name:', user.data.username)\n",
+    "print('Link: https://twitter.com/' + user.data.username)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 171,
+   "id": "397c5743",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Response(data=<User id=1188618738 name=жб ܝܘܢܰܬܰܢ username=mouettedursseau>, includes={}, errors=[], meta={})"
+      ]
+     },
+     "execution_count": 171,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "user = client.get_user(id = results.data[4].author_id)\n",
+    "user"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 172,
+   "id": "68902e4b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "User name: mouettedursseau\n",
+      "Link: https://twitter.com/mouettedursseau\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('User name:', user.data.username)\n",
+    "print('Link: https://twitter.com/' + user.data.username)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "71f8a829",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
